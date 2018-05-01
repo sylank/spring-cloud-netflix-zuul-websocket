@@ -20,12 +20,9 @@ import com.github.mthizo247.cloud.netflix.zuul.web.authentication.BasicAuthPrinc
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.CompositeHeadersCallback;
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.LoginCookieHeadersCallback;
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.OAuth2BearerPrincipalHeadersCallback;
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterManager;
 import com.github.mthizo247.cloud.netflix.zuul.web.filter.ProxyRedirectFilter;
-import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.CompositeProxyTargetResolver;
-import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.EurekaProxyTargetResolver;
-import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.LoadBalancedProxyTargetResolver;
-import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.ProxyTargetResolver;
-import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.UrlProxyTargetResolver;
+import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.*;
 import com.github.mthizo247.cloud.netflix.zuul.web.util.DefaultErrorAnalyzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,11 +49,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration;
-import org.springframework.web.socket.config.annotation.SockJsServiceRegistration;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.config.annotation.*;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
@@ -64,11 +57,7 @@ import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Zuul reverse proxy web socket configuration
@@ -100,6 +89,9 @@ public class ZuulWebSocketConfiguration extends AbstractWebSocketMessageBrokerCo
     @Autowired
     @Qualifier("compositeHeadersCallback")
     WebSocketHttpHeadersCallback webSocketHttpHeadersCallback;
+
+    @Autowired
+    FilterManager filterManager;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -161,7 +153,8 @@ public class ZuulWebSocketConfiguration extends AbstractWebSocketMessageBrokerCo
                         handler, stompClient, webSocketHttpHeadersCallback,
                         messagingTemplate,
                         proxyTargetResolver,
-                        zuulWebSocketProperties);
+                        zuulWebSocketProperties,
+                        filterManager);
                 proxyWebSocketHandler.errorHandler(proxyWebSocketErrorHandler);
                 return proxyWebSocketHandler;
             }

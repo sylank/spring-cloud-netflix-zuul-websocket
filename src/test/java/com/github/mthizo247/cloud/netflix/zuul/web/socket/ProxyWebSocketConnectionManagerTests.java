@@ -28,9 +28,7 @@ import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Ronald Mthombeni
@@ -70,7 +68,7 @@ public class ProxyWebSocketConnectionManagerTests {
 
         proxyConnectionManager.start();
 
-        proxyConnectionManager.sendMessage(destination, message);
+        proxyConnectionManager.sendMessage(destination, message, null);
 
         verify(serverSession).send(destination, message.getBytes());
     }

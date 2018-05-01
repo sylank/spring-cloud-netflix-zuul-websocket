@@ -16,6 +16,7 @@
 
 package com.github.mthizo247.cloud.netflix.zuul.web.socket;
 
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterManager;
 import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.ProxyTargetResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ public class ProxyWebSocketHandler extends WebSocketHandlerDecorator {
     private final ZuulWebSocketProperties zuulWebSocketProperties;
     private final WebSocketStompClient stompClient;
     private final Map<WebSocketSession, ProxyWebSocketConnectionManager> managers = new ConcurrentHashMap<>();
+    private final FilterManager filterManager;
     private ErrorHandler errorHandler;
 
     public ProxyWebSocketHandler(WebSocketHandler delegate,
@@ -58,13 +60,15 @@ public class ProxyWebSocketHandler extends WebSocketHandlerDecorator {
                                  WebSocketHttpHeadersCallback headersCallback,
                                  SimpMessagingTemplate messagingTemplate,
                                  ProxyTargetResolver proxyTargetResolver,
-                                 ZuulWebSocketProperties zuulWebSocketProperties) {
+                                 ZuulWebSocketProperties zuulWebSocketProperties,
+                                 FilterManager filterManager) {
         super(delegate);
         this.stompClient = stompClient;
         this.headersCallback = headersCallback;
         this.messagingTemplate = messagingTemplate;
         this.proxyTargetResolver = proxyTargetResolver;
         this.zuulWebSocketProperties = zuulWebSocketProperties;
+        this.filterManager = filterManager;
     }
 
     public void errorHandler(ErrorHandler errorHandler) {
@@ -211,7 +215,7 @@ public class ProxyWebSocketHandler extends WebSocketHandlerDecorator {
     private void sendMessageToProxiedTarget(WebSocketSession session,
                                             WebSocketMessageAccessor accessor) {
         ProxyWebSocketConnectionManager manager = managers.get(session);
-        manager.sendMessage(accessor.getDestination(), accessor.getPayload());
+        manager.sendMessage(accessor.getDestination(), accessor.getPayload(), filterManager);
     }
 
     private void subscribeToProxiedTarget(WebSocketSession session,
