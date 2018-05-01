@@ -16,7 +16,7 @@
 
 package com.github.mthizo247.cloud.netflix.zuul.web.socket;
 
-import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterManager;
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.block.FilterManager;
 import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.ProxyTargetResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -16,8 +16,8 @@
 
 package com.github.mthizo247.cloud.netflix.zuul.web.socket;
 
-import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterException;
-import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterManager;
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.block.FilterManager;
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.exception.FilterException;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;

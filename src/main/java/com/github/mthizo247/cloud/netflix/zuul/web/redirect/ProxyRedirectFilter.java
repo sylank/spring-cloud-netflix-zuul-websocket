@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.mthizo247.cloud.netflix.zuul.web.filter;
+package com.github.mthizo247.cloud.netflix.zuul.web.redirect;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.netflix.util.Pair;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UrlPathHelper;
 
-import com.netflix.util.Pair;
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author Ronald Mthombeni

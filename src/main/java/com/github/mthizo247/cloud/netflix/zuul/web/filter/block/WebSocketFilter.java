@@ -1,10 +1,11 @@
-package com.github.mthizo247.cloud.netflix.zuul.web.filter;
+package com.github.mthizo247.cloud.netflix.zuul.web.filter.block;
 
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.exception.FilterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class WebsocketFilter implements Comparable<WebsocketFilter>{
-    private final Logger logger = LoggerFactory.getLogger(WebsocketFilter.class);
+public abstract class WebSocketFilter implements Comparable<WebSocketFilter>{
+    private final Logger logger = LoggerFactory.getLogger(WebSocketFilter.class);
 
     public abstract void doFilter(final String destination, final Object msg) throws FilterException;
 
@@ -27,7 +28,7 @@ public abstract class WebsocketFilter implements Comparable<WebsocketFilter>{
     }
 
     @Override
-    public int compareTo(WebsocketFilter o) {
+    public int compareTo(WebSocketFilter o) {
         return this.getOrder()-o.getOrder();
     }
 }
