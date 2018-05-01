@@ -9,7 +9,7 @@ spring-cloud-netflix-zuul-websocket is available from **Maven Central**
 <dependency>
   <groupId>com.github.mthizo247</groupId>
   <artifactId>spring-cloud-netflix-zuul-websocket</artifactId>
-  <version>1.0.0-RELEASE</version>
+  <version>1.0.7-RELEASE</version>
 </dependency>
 ```
 
