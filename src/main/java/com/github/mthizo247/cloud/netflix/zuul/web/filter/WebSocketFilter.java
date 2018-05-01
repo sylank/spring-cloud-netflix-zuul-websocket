@@ -1,4 +1,4 @@
-package com.github.mthizo247.cloud.netflix.zuul.web.filter.block;
+package com.github.mthizo247.cloud.netflix.zuul.web.filter;
 
 import com.github.mthizo247.cloud.netflix.zuul.web.filter.exception.FilterException;
 import org.slf4j.Logger;

@@ -20,7 +20,7 @@ import com.github.mthizo247.cloud.netflix.zuul.web.authentication.BasicAuthPrinc
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.CompositeHeadersCallback;
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.LoginCookieHeadersCallback;
 import com.github.mthizo247.cloud.netflix.zuul.web.authentication.OAuth2BearerPrincipalHeadersCallback;
-import com.github.mthizo247.cloud.netflix.zuul.web.filter.block.FilterManager;
+import com.github.mthizo247.cloud.netflix.zuul.web.filter.FilterManager;
 import com.github.mthizo247.cloud.netflix.zuul.web.proxytarget.*;
 import com.github.mthizo247.cloud.netflix.zuul.web.redirect.ProxyRedirectFilter;
 import com.github.mthizo247.cloud.netflix.zuul.web.util.DefaultErrorAnalyzer;
